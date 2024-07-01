@@ -2,4 +2,3 @@ black
 pylint
 mypy
 pytest
-pytest-cov
