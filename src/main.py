@@ -38,7 +38,7 @@ from urlutils import (
     remove_duplicates,
 )
 from fileutils import download_file
-from utils import create_directory, connection
+from utils import create_directory, connection, extract_date_from_filename
 
 
 # config constants
@@ -76,6 +76,7 @@ if __name__ == "__main__":
         df = pd.read_excel(f"files/{file}",skiprows=13)
         df = df.iloc[:, 1:]
         df=df[df['Treatment Function Code']=='C_999']
+        df['Date']=extract_date_from_filename(file)
         rows=len(df)
         print(f"Loading  {rows} rows")
         with connection() as conn:
