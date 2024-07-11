@@ -33,6 +33,7 @@ and retrieving credentials securely from Azure KeyVault.
 """
 
 import os
+import re
 from contextlib import contextmanager
 import urllib
 from typing import Iterator
@@ -103,3 +104,18 @@ def get_credential(name: str) -> str:
             "Credential value not found or empty, please check KeyVault."
         )
     return credential_value
+
+
+def extract_date_from_filename(filename):
+    # Define the regex pattern to match the date
+    # Assuming the date format is a three-letter month followed by a two-digit day (e.g., Mar24)
+    pattern = r'([A-Za-z]{3}\d{2})'
+    
+    # Search for the pattern in the filename
+    match = re.search(pattern, filename)
+    
+    # If a match is found, return it
+    if match:
+        return match.group(1)
+    else:
+        return None
